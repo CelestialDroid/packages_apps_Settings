@@ -26,6 +26,13 @@
      <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
      </Preference>
 
+     <com.android.settings.celestial.preferences.SecureSettingSwitchPreference
+          android:key="enable_location_privacy_indicator"
+          android:icon="@drawable/ic_map_marker"
+          android:title="@string/location_privacy_indicator_title"
+          android:summary="@string/location_privacy_indicator_summary"
+          android:defaultValue="true" />
+
      <Preference
         android:key="battery_settings"
         android:title="@string/battery_style_category_title"
