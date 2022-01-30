@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.display;
 
 import android.content.Context;
 import android.os.IBinder;
@@ -24,7 +24,7 @@ import android.os.ServiceManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -72,18 +72,6 @@ public class ShowRefreshRatePreferenceController extends DeveloperOptionsPrefere
         updateShowRefreshRateSetting();
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        final TwoStatePreference preference = (TwoStatePreference) mPreference;
-        if (preference.isChecked()) {
-            // Writing false to the preference when the setting is already off will have a
-            // side effect of turning on the preference that we wish to avoid
-            writeShowRefreshRateSetting(false);
-            preference.setChecked(false);
-        }
-    }
-
     @VisibleForTesting
     void updateShowRefreshRateSetting() {
         // magic communication with surface flinger.
@@ -95,7 +83,7 @@ public class ShowRefreshRatePreferenceController extends DeveloperOptionsPrefere
                 data.writeInt(SETTING_VALUE_QUERY);
                 mSurfaceFlinger.transact(SURFACE_FLINGER_CODE, data, reply, 0 /* flags */);
                 final boolean enabled = reply.readBoolean();
-                ((TwoStatePreference) mPreference).setChecked(enabled);
+                ((SwitchPreference) mPreference).setChecked(enabled);
                 reply.recycle();
                 data.recycle();
             }
