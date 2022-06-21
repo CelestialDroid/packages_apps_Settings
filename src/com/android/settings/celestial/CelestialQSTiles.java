@@ -21,10 +21,18 @@ import com.android.internal.logging.nano.MetricsProto;
 import android.content.Context;
 import android.content.ContentResolver;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import com.android.settings.dashboard.DashboardFragment;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -34,23 +42,35 @@ import android.os.UserHandle;
 import android.content.ContentResolver;
 import android.content.Context;
 
+import com.android.settings.celestial.preferences.SeekBarPreferenceCham;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CelestialQSTiles extends DashboardFragment {
+
+@SearchIndexable
+public class CelestialQSTiles extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "CelestialQSTiles";
+
+    private static final String KEY_PREF_TILE_ANIM_STYLE = "qs_tile_animation_style";
+    private static final String KEY_PREF_TILE_ANIM_DURATION = "qs_tile_animation_duration";
+    private static final String KEY_PREF_TILE_ANIM_INTERPOLATOR = "qs_tile_animation_interpolator";
+
+    private ListPreference mTileAnimationStyle;
+    private SeekBarPreferenceCham mTileAnimationDuration;
+    private ListPreference mTileAnimationInterpolator;
 
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.CELESTIAL_SETTINGS;
     }
 
-    @Override
+    /*@Override
     protected String getLogTag() {
         return TAG;
-    }
+    }*/
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -58,19 +78,32 @@ public class CelestialQSTiles extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        final Context mContext = getActivity().getApplicationContext();
+        final ContentResolver resolver = mContext.getContentResolver();
+
+        mTileAnimationStyle = (ListPreference) findPreference(KEY_PREF_TILE_ANIM_STYLE);
+        mTileAnimationDuration = (SeekBarPreferenceCham) findPreference(KEY_PREF_TILE_ANIM_DURATION);
+        mTileAnimationInterpolator = (ListPreference) findPreference(KEY_PREF_TILE_ANIM_INTERPOLATOR);
+
+        mTileAnimationStyle.setOnPreferenceChangeListener(this);
+
+        int tileAnimationStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_TILE_ANIMATION_STYLE, 0, UserHandle.USER_CURRENT);
+        updateAnimTileStyle(tileAnimationStyle);
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mTileAnimationStyle) {
+            int value = Integer.parseInt((String) newValue);
+            updateAnimTileStyle(value);
+            return true;
+        }
+        return false;
     }
-
-    /*@Override
-    public int getHelpResource() {
-        return R.string.help_uri_display;
-    }*/
 
     public static void reset(Context mContext) {
         ContentResolver resolver = mContext.getContentResolver();
@@ -78,6 +111,17 @@ public class CelestialQSTiles extends DashboardFragment {
                 Settings.System.QS_TRANSPARENCY, 100, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
                 Settings.System.QS_SHOW_DATA_USAGE, 0, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.QS_TILE_ANIMATION_STYLE, 0, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.QS_TILE_ANIMATION_DURATION, 1, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.QS_TILE_ANIMATION_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
+    }
+
+    private void updateAnimTileStyle(int tileAnimationStyle) {
+        mTileAnimationDuration.setEnabled(tileAnimationStyle != 0);
+        mTileAnimationInterpolator.setEnabled(tileAnimationStyle != 0);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
