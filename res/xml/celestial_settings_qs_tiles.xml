@@ -100,6 +100,16 @@
             android:summary="@string/qs_tile_label_hide_summary"
             android:defaultValue="false" />
 
+        <com.android.settings.celestial.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tile_label_size"
+            android:icon="@drawable/ic_text"
+            android:title="@string/qs_tile_label_size_title"
+            android:max="15"
+            settings:min="10"
+            settings:interval="1"
+            settings:units="sp"
+            android:defaultValue="14" />
+
         <com.android.settings.celestial.preferences.SystemSettingSwitchPreference
             android:key="qs_tile_vertical_layout"
             android:icon="@drawable/ic_qs_tile"
