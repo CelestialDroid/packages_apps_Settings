@@ -19,13 +19,21 @@ package com.android.settings.celestial;
 
 import com.android.internal.logging.nano.MetricsProto;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import android.provider.Settings;
+import android.os.UserHandle;
+import android.content.ContentResolver;
+import android.content.Context;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +71,12 @@ public class CelestialQSTiles extends DashboardFragment {
     public int getHelpResource() {
         return R.string.help_uri_display;
     }*/
+
+    public static void reset(Context mContext) {
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.System.putIntForUser(resolver,
+                Settings.System.QS_TRANSPARENCY, 100, UserHandle.USER_CURRENT);
+    }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
