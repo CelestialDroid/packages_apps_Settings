@@ -61,6 +61,17 @@
         settings:highlightableMenuKey="@string/menu_key_apps"/>
 
     <com.android.settings.widget.HomepagePreference
+        android:fragment="com.android.settings.celestial.CelestialSettings"
+        android:icon="@drawable/ic_apps"
+        android:key="top_level_celestial"
+        android:order="-130"
+        android:title="@string/celestial_settings"
+        android:summary="@string/celestial_dashboard_summary"
+        settings:highlightableMenuKey="@string/menu_key_celestial"
+        settings:controller="com.android.settings.celestial.TopLevelCelestialPreferenceController"/>
+
+
+    <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
         android:icon="@drawable/ic_notifications"
         android:key="top_level_notifications"
