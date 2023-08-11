@@ -4546,6 +4546,146 @@
             </intent-filter>
         </activity>
 
+
+        <!-- celestial stuff -->
+        <activity
+            android:name="Settings$CelestialSettingsActivity"
+            android:label="@string/celestial_settings"
+            android:icon="@drawable/ic_homepage_apps"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.CELESTIAL_SETTINGS" />
+                <action android:name="android.settings.CELESTIAL_SETTINGS" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="30">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialSettings"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$CelestialStatusBarActivity"
+            android:label="@string/celestial_settings_statusbar"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_apps">
+            <intent-filter>
+                <action android:name="com.android.settings.CELESTIAL_STATUS_BAR" />
+                <action android:name="android.settings.CELESTIAL_STATUS_BAR" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialStatusBar"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$CelestialStatusBarActivity"
+            android:label="@string/celestial_settings_statusbar"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_apps">
+            <intent-filter>
+                <action android:name="com.android.settings.CELESTIAL_STATUS_BAR" />
+                <action android:name="android.settings.CELESTIAL_STATUS_BAR" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialStatusBar"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$CelestialQuickTilesActivity"
+            android:label="@string/celestial_settings_qs_tiles"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_apps">
+            <intent-filter>
+                <action android:name="com.android.settings.CELESTIAL_QUICK_TILES" />
+                <action android:name="android.settings.CELESTIAL_QUICK_TILES" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialQSTiles"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$CelestialButtonsActivity"
+            android:label="@string/celestial_settings_buttons"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_apps">
+            <intent-filter>
+                <action android:name="com.android.settings.CELESTIAL_BUTTONS" />
+                <action android:name="android.settings.CELESTIAL_BUTTONS" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialButtons"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$CelestialThemesActivity"
+            android:label="@string/celestial_settings_themes"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_apps">
+            <intent-filter>
+                <action android:name="com.android.settings.CELESTIAL_THEMES" />
+                <action android:name="android.settings.CELESTIAL_THEMES" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialThemes"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$CelestialMiscActivity"
+            android:label="@string/celestial_settings_misc"
+            android:exported="true"
+            android:icon="@drawable/ic_homepage_apps">
+            <intent-filter>
+                <action android:name="com.android.settings.CELESTIAL_MISC" />
+                <action android:name="android.settings.CELESTIAL_MISC" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.celestial.CelestialMisc"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_celestial"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity>
+
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
