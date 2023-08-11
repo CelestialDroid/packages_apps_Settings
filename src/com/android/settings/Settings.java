@@ -517,6 +517,22 @@ public class Settings extends SettingsActivity {
      */
     public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 
+    /* 
+     * Celestial Settings 
+     */
+    public static class CelestialSettingsActivity extends SettingsActivity { /* empty */ }
+
+    public static class CelestialStatusBarActivity extends SettingsActivity { /* empty */ }
+
+    public static class CelestialQSTilesActivity extends SettingsActivity { /* empty */ }
+
+    public static class CelestialButtonsActivity extends SettingsActivity { /* empty */ }
+
+    public static class CelestialThemesActivity extends SettingsActivity { /* empty */ }
+
+    public static class CelestialMiscActivity extends SettingsActivity { /* empty */ }
+
+
     public static class AppNativeDebuggingActivity extends SettingsActivity {}
 
     public static class AppMemtagActivity extends SettingsActivity {}
