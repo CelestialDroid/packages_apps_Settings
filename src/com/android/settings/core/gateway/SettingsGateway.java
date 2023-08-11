@@ -195,8 +195,6 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
-import ink.kscope.settings.wifi.tether.WifiTetherClientManager;
-
 public class SettingsGateway {
 
     /**
@@ -390,6 +388,7 @@ public class SettingsGateway {
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
             Settings.AppDashboardActivity.class.getName(),
+            Settings.CelestialSettingsActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
             Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
@@ -414,6 +413,12 @@ public class SettingsGateway {
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
+            // Home page > Celestial Settings
+            Settings.CelestialStatusBarActivity.class.getName(),
+            Settings.CelestialQSTilesActivity.class.getName(),
+            Settings.CelestialButtonsActivity.class.getName(),
+            Settings.CelestialThemesActivity.class.getName(),
+            Settings.CelestialMiscActivity.class.getName(),
             // Home page > Display
             Settings.AdaptiveBrightnessActivity.class.getName(),
             // Home page > Security & screen lock
