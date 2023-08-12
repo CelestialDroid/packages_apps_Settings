@@ -19,4 +19,10 @@
     android:key="celestial_buttons"
     android:title="@string/celestial_buttons">
 
+    <com.android.settings.celestial.preferences.SecureSettingSwitchPreference
+        android:key="advanced_reboot"
+        android:title="@string/global_actions_advanced_reboot_title"
+        android:summary="@string/global_actions_advanced_reboot_summary"
+        android:defaultValue="true" />
+
 </PreferenceScreen>
