@@ -20,28 +20,41 @@ package com.android.settings.celestial;
 import com.android.internal.logging.nano.MetricsProto;
 import android.content.Context;
 import android.os.Bundle;
+import android.content.ContentResolver;
+import android.os.SystemProperties;
+import android.widget.Toast;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settings.SettingsPreferenceFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CelestialMisc extends DashboardFragment {
+public class CelestialMisc extends SettingsPreferenceFragment implements
+        OnPreferenceChangeListener {
     private static final String TAG = "CelestialMisc";
+
+    private static final String KEY_PHOTOS_SPOOF = "use_photos_spoof";
+
+    private static final String SYS_PHOTOS_SPOOF = "persist.sys.pixelprops.gphotos";
+
+    private SwitchPreference mPhotosSpoof;
 
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.CELESTIAL_SETTINGS;
-    }
-
-    @Override
-    protected String getLogTag() {
-        return TAG;
     }
 
     @Override
@@ -52,17 +65,25 @@ public class CelestialMisc extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        final PreferenceScreen prefSet = getPreferenceScreen();
+        final ContentResolver resolver = getActivity().getContentResolver();
+
+        mPhotosSpoof = (SwitchPreference) findPreference(KEY_PHOTOS_SPOOF);
+        mPhotosSpoof.setChecked(SystemProperties.getBoolean(SYS_PHOTOS_SPOOF, true));
+        mPhotosSpoof.setOnPreferenceChangeListener(this);
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mPhotosSpoof) {
+            boolean value = (Boolean) newValue;
+            SystemProperties.set(SYS_PHOTOS_SPOOF, value ? "true" : "false");
+            return true;
+        }
+        return false;
     }
-
-    /*@Override
-    public int getHelpResource() {
-        return R.string.help_uri_display;
-    }*/
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
