@@ -26,4 +26,10 @@
      <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
      </Preference>
 
+     <com.android.settings.celestial.preferences.SystemSettingSwitchPreference
+          android:key="statusbar_colored_icons"
+          android:title="@string/status_bar_colored_icons_title"
+          android:summary="@string/status_bar_colored_icons_summary"
+          android:defaultValue="false" />
+
 </PreferenceScreen>
