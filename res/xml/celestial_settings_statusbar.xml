@@ -32,4 +32,10 @@
           android:summary="@string/status_bar_colored_icons_summary"
           android:defaultValue="false" />
 
+     <Preference
+        android:key="battery_settings"
+        android:title="@string/battery_style_category_title"
+        android:summary="@string/battery_style_category_summary"
+        android:fragment="com.android.settings.celestial.fragments.StatusBarBattery" />
+
 </PreferenceScreen>
