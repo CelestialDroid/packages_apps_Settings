@@ -137,6 +137,7 @@
 
     <application
             android:name=".SettingsApplication"
+            tools:replace="android:name"
             android:label="@string/settings_label"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
@@ -4952,25 +4953,6 @@
                        android:value="@string/menu_key_celestial"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <activity
-            android:name=".Settings$CelestialStatusBarActivity"
-            android:label="@string/celestial_settings_statusbar"
-            android:exported="true"
-            android:icon="@drawable/ic_homepage_apps">
-            <intent-filter>
-                <action android:name="com.android.settings.CELESTIAL_STATUS_BAR" />
-                <action android:name="android.settings.CELESTIAL_STATUS_BAR" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.celestial.CelestialStatusBar"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_celestial"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true"/>
         </activity>
 
         <activity
