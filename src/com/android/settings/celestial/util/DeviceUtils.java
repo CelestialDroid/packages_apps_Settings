@@ -37,10 +37,12 @@ import android.provider.Settings;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.DisplayInfo;
 import android.view.WindowManager;
 import android.util.Log;
+import android.view.Surface;
 
 import com.android.internal.telephony.PhoneConstants;
 
@@ -60,7 +62,35 @@ public class DeviceUtils {
     private static final int DEVICE_HYBRID = 1;
     private static final int DEVICE_TABLET = 2;
 
-    private static final int NO_CUTOUT = -1;
+    /* returns whether the device has a centered display cutout or not. */
+    public static boolean hasCenteredCutout(Context context) {
+        Display display = context.getDisplay();
+        DisplayCutout cutout = display.getCutout();
+        if (cutout != null) {
+            Point realSize = new Point();
+            display.getRealSize(realSize);
+
+            switch (display.getRotation()) {
+                case Surface.ROTATION_0: {
+                    Rect rect = cutout.getBoundingRectTop();
+                    return !(rect.left <= 0 || rect.right >= realSize.x);
+                }
+                case Surface.ROTATION_90: {
+                    Rect rect = cutout.getBoundingRectLeft();
+                    return !(rect.top <= 0 || rect.bottom >= realSize.y);
+                }
+                case Surface.ROTATION_180: {
+                    Rect rect = cutout.getBoundingRectBottom();
+                    return !(rect.left <= 0 || rect.right >= realSize.x);
+                }
+                case Surface.ROTATION_270: {
+                    Rect rect = cutout.getBoundingRectRight();
+                    return !(rect.top <= 0 || rect.bottom >= realSize.y);
+                }
+            }
+        }
+        return false;
+    }
 
     public static boolean deviceSupportsRemoteDisplay(Context ctx) {
         DisplayManager dm = (DisplayManager) ctx.getSystemService(Context.DISPLAY_SERVICE);
@@ -224,30 +254,4 @@ public class DeviceUtils {
         return false;
     }
 
-    public static int getCutoutType(Context context) {
-        final DisplayInfo info = new DisplayInfo();
-        context.getDisplay().getDisplayInfo(info);
-        final DisplayCutout cutout = info.displayCutout;
-        if (cutout == null) {
-            if (DEBUG) Log.v(TAG, "noCutout");
-            return NO_CUTOUT;
-        }
-        final Point displaySize = new Point();
-        context.getDisplay().getRealSize(displaySize);
-        List<Rect> cutOutBounds = cutout.getBoundingRects();
-        if (cutOutBounds != null) {
-            for (Rect cutOutRect : cutOutBounds) {
-                if (DEBUG) Log.v(TAG, "cutout left= " + cutOutRect.left);
-                if (DEBUG) Log.v(TAG, "cutout right= " + cutOutRect.right);
-                if (cutOutRect.left == 0 && cutOutRect.right > 0) {  //cutout is located on top left
-                    if (DEBUG) Log.v(TAG, "cutout position= " + BOUNDS_POSITION_LEFT);
-                    return BOUNDS_POSITION_LEFT;
-                } else if (cutOutRect.right == displaySize.x && (displaySize.x - cutOutRect.left) > 0) {  //cutout is located on top right
-                    if (DEBUG) Log.v(TAG, "cutout position= " + BOUNDS_POSITION_RIGHT);
-                    return BOUNDS_POSITION_RIGHT;
-                }
-            }
-        }
-        return NO_CUTOUT;
-    }
 }

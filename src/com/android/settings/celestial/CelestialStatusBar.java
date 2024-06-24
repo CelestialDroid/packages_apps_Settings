@@ -37,7 +37,7 @@ import com.android.settings.R;
 
 import com.android.settings.celestial.preferences.SystemSettingListPreference;
 import com.android.settings.celestial.fragments.Clock;
-//import com.android.settings.celestial.utils.DeviceUtils;
+import com.android.settings.celestial.util.DeviceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,23 +76,18 @@ public class CelestialStatusBar extends DashboardFragment {
                 (SystemSettingListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
 
         // Adjust status bar preferences for RTL
-        //if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
-        //    if (DeviceUtils.hasNotch(mContext)) {
-        //        mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch_rtl);
-        //        mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch_rtl);
-        //    } else {
-                //mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_rtl);
-                //mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
-        //    }
-        //} else if (DeviceUtils.hasNotch(mContext)) {*/
-            //StatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
-            //mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
-        //}
-    //}
-        //} else if (DeviceUtils.hasCenteredCutout(mContext)) {
-            //mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
-            //mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
-        //}
+        if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            if (DeviceUtils.hasCenteredCutout(mContext)) {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch_rtl);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch_rtl);
+            } else {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_rtl);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
+            }
+        } else if (DeviceUtils.hasCenteredCutout(mContext)) {
+            mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
+            mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+        }
     }
 
     @Override
