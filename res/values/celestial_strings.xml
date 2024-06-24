@@ -185,6 +185,9 @@
 
      <!-- Themes category -->
 
+    <string name="theme_noverlay">System default</string>
+
+
 
      <!-- Misc category -->
 

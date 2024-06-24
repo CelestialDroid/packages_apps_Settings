@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 AICP
+ * Copyright (C) 2017-2023 AICP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +19,17 @@ package com.android.settings.celestial.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class SystemSettingIntListPreference extends SystemSettingListPreference {
+public class GlobalSettingIntListPreference extends GlobalSettingListPreference {
 
-    public SystemSettingIntListPreference(Context context, AttributeSet attrs, int defStyle) {
+    public GlobalSettingIntListPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public SystemSettingIntListPreference(Context context, AttributeSet attrs) {
+    public GlobalSettingIntListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SystemSettingIntListPreference(Context context) {
+    public GlobalSettingIntListPreference(Context context) {
         super(context);
     }
 

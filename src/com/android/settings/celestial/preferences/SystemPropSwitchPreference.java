@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 AICP
+ * Copyright (C) 2020 Android Ice Cold Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,33 +17,34 @@
 package com.android.settings.celestial.preferences;
 
 import android.content.Context;
-import android.text.TextUtils;
+import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
 
-public class SecureSettingListPreference extends ListPreference {
+public class SystemPropSwitchPreference extends SwitchPreference {
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
+    public SystemPropSwitchPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new SystemPropStore());
     }
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs) {
+    public SystemPropSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new SystemPropStore());
     }
 
-    public SecureSettingListPreference(Context context) {
+    public SystemPropSwitchPreference(Context context) {
         super(context);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new SystemPropStore());
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        // This is what default ListPreference implementation is doing without respecting
+        // This is what default TwoStatePreference implementation is doing without respecting
         // real default value:
-        //setValue(restoreValue ? getPersistedString(mValue) : (String) defaultValue);
+        //setChecked(restoreValue ? getPersistedBoolean(mChecked)
+        //        : (Boolean) defaultValue);
         // Instead, we better do
-        setValue(restoreValue ? getPersistedString((String) defaultValue) : (String) defaultValue);
+        setChecked(restoreValue ? getPersistedBoolean((Boolean) defaultValue)
+                : (Boolean) defaultValue);
     }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 AICP
+ * Copyright (C) 2019 Android Ice Cold Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,21 +20,21 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-public class SecureSettingListPreference extends ListPreference {
+public class SystemPropListPreference extends ListPreference {
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
+    public SystemPropListPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new SystemPropStore());
     }
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs) {
+    public SystemPropListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new SystemPropStore());
     }
 
-    public SecureSettingListPreference(Context context) {
+    public SystemPropListPreference(Context context) {
         super(context);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new SystemPropStore());
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 AICP
+ * Copyright (C) 2017-2020 AICP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,24 +17,24 @@
 package com.android.settings.celestial.preferences;
 
 import android.content.Context;
-import android.text.TextUtils;
+import androidx.preference.ListPreference;
 import android.util.AttributeSet;
 
-public class SecureSettingListPreference extends ListPreference {
+public class GlobalSettingListPreference extends ListPreference {
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
+    public GlobalSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new GlobalSettingsStore(context.getContentResolver()));
     }
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs) {
+    public GlobalSettingListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new GlobalSettingsStore(context.getContentResolver()));
     }
 
-    public SecureSettingListPreference(Context context) {
+    public GlobalSettingListPreference(Context context) {
         super(context);
-        setPreferenceDataStore(new SecureSettingsStore(context.getContentResolver()));
+        setPreferenceDataStore(new GlobalSettingsStore(context.getContentResolver()));
     }
 
     @Override
@@ -45,5 +45,4 @@ public class SecureSettingListPreference extends ListPreference {
         // Instead, we better do
         setValue(restoreValue ? getPersistedString((String) defaultValue) : (String) defaultValue);
     }
-
 }

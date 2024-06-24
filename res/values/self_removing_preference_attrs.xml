@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2018 The Dirty Unicorns Project
+<!--
+     Copyright (C) 2018 The Android Ice Cold Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,10 +16,16 @@
 -->
 <resources>
 
-    <!-- Base attributes available to SeekBarPreference. -->
-    <declare-styleable name="SeekBarPreference">
-        <attr name="interval" format="integer" />
-        <attr name="units" format="string|reference" />
+    <declare-styleable name="celestial_SelfRemovingPreference">
+        <attr name="replacesKey" format="string" />
+        <attr name="requiresOwner" format="boolean" />
+        <attr name="requiresPackageInstalled" format="string" />
+        <attr name="requiresPackageAvailable" format="string" />
+        <attr name="requiresPackageEnabled" format="string" />
+        <attr name="requiresAction" format="string" />
+        <attr name="requiresProperty" format="string" />
+        <attr name="requiresConfig" format="string" />
+        <attr name="requiresConfigMask" format="integer" />
     </declare-styleable>
 
 </resources>

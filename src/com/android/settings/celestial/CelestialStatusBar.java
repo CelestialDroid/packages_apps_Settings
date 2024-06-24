@@ -108,7 +108,7 @@ public class CelestialStatusBar extends DashboardFragment {
     public static void reset(Context mContext) {
         ContentResolver resolver = mContext.getContentResolver();
         Settings.System.putIntForUser(resolver,
-                Settings.System.STATUS_BAR_CLOCK, 2, UserHandle.USER_CURRENT);
+                Settings.System.STATUS_BAR_CLOCK, 0, UserHandle.USER_CURRENT);
         Clock.reset(mContext);
     }
 

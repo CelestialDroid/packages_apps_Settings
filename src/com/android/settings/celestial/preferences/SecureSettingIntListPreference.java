@@ -19,20 +19,28 @@ package com.android.settings.celestial.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class CustomSystemSeekBarPreference extends CustomSeekBarPreference {
+public class SecureSettingIntListPreference extends SecureSettingListPreference {
 
-    public CustomSystemSeekBarPreference(Context context, AttributeSet attrs, int defStyle) {
+    public SecureSettingIntListPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 
-    public CustomSystemSeekBarPreference(Context context, AttributeSet attrs) {
+    public SecureSettingIntListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 
-    public CustomSystemSeekBarPreference(Context context) {
-        super(context, null);
-        setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
+    public SecureSettingIntListPreference(Context context) {
+        super(context);
     }
+
+    @Override
+    protected boolean persistString(String value) {
+        return persistInt(Integer.parseInt(value));
+    }
+
+    @Override
+    protected String getPersistedString(String defaultReturnValue) {
+        return String.valueOf(getPersistedInt(Integer.parseInt(defaultReturnValue)));
+    }
+
 }

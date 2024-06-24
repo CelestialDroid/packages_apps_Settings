@@ -37,7 +37,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.android.settings.celestial.preferences.CustomSeekBarPreference;
+import com.android.settings.celestial.preferences.SeekBarPreference;
 import com.android.settings.celestial.preferences.SystemSettingListPreference;
 
 import java.util.Date;

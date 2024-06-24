@@ -19,28 +19,22 @@ package com.android.settings.celestial.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class SystemSettingIntListPreference extends SystemSettingListPreference {
+import com.android.settings.celestial.preferences.colorpicker.ColorPickerPreference;
 
-    public SystemSettingIntListPreference(Context context, AttributeSet attrs, int defStyle) {
+public class SystemSettingColorPickerPreference extends ColorPickerPreference {
+
+    public SystemSettingColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 
-    public SystemSettingIntListPreference(Context context, AttributeSet attrs) {
+    public SystemSettingColorPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
 
-    public SystemSettingIntListPreference(Context context) {
+    public SystemSettingColorPickerPreference(Context context) {
         super(context);
+        setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
     }
-
-    @Override
-    protected boolean persistString(String value) {
-        return persistInt(Integer.parseInt(value));
-    }
-
-    @Override
-    protected String getPersistedString(String defaultReturnValue) {
-        return String.valueOf(getPersistedInt(Integer.parseInt(defaultReturnValue)));
-    }
-
 }
