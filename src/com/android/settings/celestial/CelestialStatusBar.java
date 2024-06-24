@@ -17,9 +17,15 @@
 
 package com.android.settings.celestial;
 
+
 import com.android.internal.logging.nano.MetricsProto;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
+import android.view.View;
+
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -27,12 +33,23 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.android.settings.R;
+
+import com.android.settings.celestial.preferences.SystemSettingListPreference;
+import com.android.settings.celestial.fragments.Clock;
+//import com.android.settings.celestial.utils.DeviceUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CelestialStatusBar extends DashboardFragment {
     private static final String TAG = "CelestialStatusBar";
+
+    private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
+
+    private SystemSettingListPreference mStatusBarClock;
+
 
     @Override
     public int getMetricsCategory() {
@@ -52,6 +69,30 @@ public class CelestialStatusBar extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        Context mContext = getActivity().getApplicationContext();
+
+        mStatusBarClock =
+                (SystemSettingListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
+
+        // Adjust status bar preferences for RTL
+        //if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+        //    if (DeviceUtils.hasNotch(mContext)) {
+        //        mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch_rtl);
+        //        mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch_rtl);
+        //    } else {
+                //mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_rtl);
+                //mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
+        //    }
+        //} else if (DeviceUtils.hasNotch(mContext)) {*/
+            //StatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
+            //mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+        //}
+    //}
+        //} else if (DeviceUtils.hasCenteredCutout(mContext)) {
+            //mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
+            //mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+        //}
     }
 
     @Override
@@ -63,6 +104,13 @@ public class CelestialStatusBar extends DashboardFragment {
     public int getHelpResource() {
         return R.string.help_uri_display;
     }*/
+
+    public static void reset(Context mContext) {
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.System.putIntForUser(resolver,
+                Settings.System.STATUS_BAR_CLOCK, 2, UserHandle.USER_CURRENT);
+        Clock.reset(mContext);
+    }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
@@ -79,4 +127,4 @@ public class CelestialStatusBar extends DashboardFragment {
                     return buildPreferenceControllers(context, null);
                 }
             };
-}
+        }
