@@ -49,4 +49,12 @@
           android:summary="@string/status_bar_clock_summary"
           android:fragment="com.android.settings.celestial.fragments.Clock" />
 
+        <com.android.settings.celestial.preferences.SystemSettingIntListPreference
+            android:key="qs_quick_pulldown"
+            android:icon="@drawable/ic_arrow_down"
+            android:title="@string/status_bar_quick_qs_pulldown_title"
+            android:entries="@array/status_bar_quick_qs_pulldown_entries"
+            android:entryValues="@array/status_bar_quick_qs_pulldown_values"
+            android:defaultValue="0" />
+
 </PreferenceScreen>
