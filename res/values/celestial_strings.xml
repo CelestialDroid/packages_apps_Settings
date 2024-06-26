@@ -173,6 +173,14 @@
     <string name="unit_pixels" translatable="false">dp</string>
     <string name="unit_hz" translatable="false">hz</string>
 
+    <!-- Statusbar net monitor -->
+    <string name="network_traffic_title">Network traffic indicator</string>
+    <string name="network_traffic_summary">Enable or disable network speed indicator in status bar</string>
+    <string name="network_traffic_master_switch_title">Use Network Traffic Indicator</string>
+    <string name="network_options_title">Options</string>
+    <string name="network_traffic_autohide_title">Hide network traffic indicator if inactive</string>
+    <string name="network_traffic_autohide_summary">Hide when network traffic indicator is below 1 KB/s</string>
+
      <!-- Quick Tiles category -->
 
     <!-- Quick Settings brightness slider -->
