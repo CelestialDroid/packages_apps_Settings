@@ -76,6 +76,8 @@ public class CelestialQSTiles extends DashboardFragment {
         ContentResolver resolver = mContext.getContentResolver();
         Settings.System.putIntForUser(resolver,
                 Settings.System.QS_TRANSPARENCY, 100, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.QS_SHOW_DATA_USAGE, 0, UserHandle.USER_CURRENT);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
