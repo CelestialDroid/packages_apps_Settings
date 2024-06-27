@@ -156,6 +156,8 @@ public class CelestialStatusBar extends SettingsPreferenceFragment implements
                 Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN, 0, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
                 Settings.System.STATUS_BAR_CLOCK, 0, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.WIFI_STANDARD_ICON, 0, UserHandle.USER_CURRENT);
         Clock.reset(mContext);
     }
 

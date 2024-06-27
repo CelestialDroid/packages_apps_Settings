@@ -26,6 +26,13 @@
      <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
      </Preference>
 
+     <com.android.settings.celestial.preferences.SystemSettingSwitchPreference
+          android:key="wifi_standard_icon"
+          android:icon="@drawable/ic_wifi"
+          android:title="@string/wifi_standard_icon_title"
+          android:summary="@string/wifi_standard_icon_summary"
+          android:defaultValue="false"/>
+
      <com.android.settings.celestial.preferences.SecureSettingSwitchPreference
           android:key="enable_location_privacy_indicator"
           android:icon="@drawable/ic_map_marker"
@@ -33,11 +40,11 @@
           android:summary="@string/location_privacy_indicator_summary"
           android:defaultValue="true" />
 
-        <Preference
-            android:key="traffic"
-            android:fragment="com.android.settings.celestial.fragments.Traffic"
-            android:summary="@string/network_traffic_summary"
-            android:title="@string/network_traffic_title" />
+     <Preference
+          android:key="traffic"
+          android:fragment="com.android.settings.celestial.fragments.Traffic"
+          android:summary="@string/network_traffic_summary"
+          android:title="@string/network_traffic_title" />
 
      <Preference
         android:key="battery_settings"
@@ -62,12 +69,12 @@
           android:summary="@string/status_bar_clock_summary"
           android:fragment="com.android.settings.celestial.fragments.Clock" />
 
-        <com.android.settings.celestial.preferences.SystemSettingIntListPreference
-            android:key="qs_quick_pulldown"
-            android:icon="@drawable/ic_arrow_down"
-            android:title="@string/status_bar_quick_qs_pulldown_title"
-            android:entries="@array/status_bar_quick_qs_pulldown_entries"
-            android:entryValues="@array/status_bar_quick_qs_pulldown_values"
-            android:defaultValue="0" />
+     <com.android.settings.celestial.preferences.SystemSettingIntListPreference
+          android:key="qs_quick_pulldown"
+          android:icon="@drawable/ic_arrow_down"
+          android:title="@string/status_bar_quick_qs_pulldown_title"
+          android:entries="@array/status_bar_quick_qs_pulldown_entries"
+          android:entryValues="@array/status_bar_quick_qs_pulldown_values"
+          android:defaultValue="0" />
 
 </PreferenceScreen>
